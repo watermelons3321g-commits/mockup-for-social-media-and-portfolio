@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Community - Tournaments</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><i class="fas fa-gamepad"></i> Gaming Community</div>
+            <div class="nav-user">
+                <span id="currentUser">User</span>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="sidebar">
+        <a href="main.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="friends.html" class="nav-link"><i class="fas fa-users"></i> Friends</a>
+        <a href="tournaments.html" class="nav-link active"><i class="fas fa-trophy"></i> Tournaments</a>
+        <a href="index.html" class="nav-link logout-link"><i class="fas fa-sign-out-alt"></i> Exit</a>
+    </nav>
+
+    <main class="main-content">
+        <section class="tournaments-section">
+            <h1>Tournaments & Ratings</h1>
+            <p class="section-subtitle">Compete and earn ranking points</p>
+
+            <div class="tournament-tabs">
+                <button class="tab-btn active" onclick="switchTab('active')">Active</button>
+                <button class="tab-btn" onclick="switchTab('upcoming')">Upcoming</button>
+                <button class="tab-btn" onclick="switchTab('completed')">Completed</button>
+            </div>
+
+            <div id="activeTournaments" class="tab-content active">
+                <div class="tournaments-grid" id="activeTour"></div>
+            </div>
+
+            <div id="upcomingTournaments" class="tab-content">
+                <div class="tournaments-grid" id="upcomingTour"></div>
+            </div>
+
+            <div id="completedTournaments" class="tab-content">
+                <div class="tournaments-grid" id="completedTour"></div>
+            </div>
+
+            <h2 style="margin-top: 3rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-chart-line"></i> Valorant Rankings
+            </h2>
+            
+            <div class="rating-filters">
+                <button class="filter-btn active" onclick="filterRating('all')">All</button>
+                <button class="filter-btn" onclick="filterRating('week')">Weekly</button>
+                <button class="filter-btn" onclick="filterRating('month')">Monthly</button>
+            </div>
+
+            <div class="table-container">
+                <table class="rating-table" id="ratingTable">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Player</th>
+                            <th>Rating</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Win %</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ratingTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Gaming Community. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>const tournaments={active:[{name:'Valorant Pro League',game:'Valorant',players:543,prizePool:'$50k'},{name:'CS2 National',game:'CS2',players:312,prizePool:'$30k'},{name:'LoL Spring Cup',game:'LoL',players:428,prizePool:'$35k'}],upcoming:[{name:'RL World Cup',game:'RL',players:0,prizePool:'$100k'},{name:'PUBG Mobile',game:'PUBG',players:0,prizePool:'$25k'},{name:'Fighting Summit',game:'Multi',players:0,prizePool:'$20k'}],completed:[{name:'Winter 2025',game:'Valorant',players:892,prizePool:'$75k',winner:'Team Nova'},{name:'Fall 2025',game:'CS2',players:654,prizePool:'$50k',winner:'Phoenix'},{name:'Regionals 2025',game:'LoL',players:437,prizePool:'$40k',winner:'Dragons'}]},ratings=[{name:'ProPlayer_1',rating:2847,wins:487,losses:123,p:'1'},{name:'SniperAce',rating:2621,wins:445,losses:201,p:'2'},{name:'DominatorPro',rating:2512,wins:423,losses:214,p:'3'},{name:'Legend_99',rating:2398,wins:401,losses:267,p:'4'},{name:'StreamKing',rating:2284,wins:378,losses:298,p:'5'},{name:'TeamLeader',rating:2156,wins:354,losses:356,p:'6'},{name:'NoobMaster',rating:2041,wins:332,losses:389,p:'7'},{name:'CaptainVideo',rating:1923,wins:301,losses:428,p:'8'},{name:'TourneyAdmin',rating:1847,wins:287,losses:467,p:'9'},{name:'LuckyFinder',rating:1723,wins:254,losses:512,p:'10'}];function renderT(t){const c=document.getElementById(t==='active'?'activeTour':t==='upcoming'?'upcomingTour':'completedTour');c.innerHTML='';tournaments[t].forEach(tr=>{const card=document.createElement('div');card.className='tournament-card';card.innerHTML=`<div class="tournament-header"><h3>${tr.name}</h3><span class="badge">${tr.game}</span></div><div class="tournament-info"><p><i class="fas fa-users"></i> ${tr.players||'Reg'} players</p><p><i class="fas fa-trophy"></i> Prize: ${tr.prizePool}</p>${tr.winner?`<p><i class="fas fa-star"></i> Winner: ${tr.winner}</p>`:''}</div><button class="btn-primary">${t==='active'?'Join':t==='upcoming'?'Register':'Results'}</button>`;c.appendChild(card);});}function switchTab(t){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tournament-tabs .tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById(t+'Tournaments').classList.add('active');event.target.classList.add('active');}function renderRating(){const b=document.getElementById('ratingTableBody');b.innerHTML='';ratings.forEach((p,i)=>{const wr=((p.wins/(p.wins+p.losses))*100).toFixed(1),r=document.createElement('tr');r.className=i<3?'top-player':'';const medals=['','',''];r.innerHTML=`<td>${medals[i]||p.p}</td><td><strong>${p.name}</strong></td><td class="rating-value">${p.rating}</td><td class="wins-value">${p.wins}</td><td class="losses-value">${p.losses}</td><td><span class="winrate-badge">${wr}%</span></td><td><button class="btn-small" onclick="viewProfile('${p.name}')">Profile</button></td>`;b.appendChild(r);});}function filterRating(t){document.querySelectorAll('.rating-filters .filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');renderRating();}function viewProfile(n){alert('Profile: '+n);}window.addEventListener('load',()=>{renderT('active');renderT('upcoming');renderT('completed');renderRating();});</script>

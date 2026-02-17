@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Community</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><i class="fas fa-gamepad"></i> Gaming Community</div>
+            <div class="nav-user">
+                <span id="currentUser">User</span>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="sidebar">
+        <a href="main.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="friends.html" class="nav-link"><i class="fas fa-users"></i> Friends</a>
+        <a href="tournaments.html" class="nav-link"><i class="fas fa-trophy"></i> Tournaments</a>
+        <a href="index.html" class="nav-link logout-link"><i class="fas fa-sign-out-alt"></i> Exit</a>
+    </nav>
+
+    <main class="main-content">
+        <section class="slider-container">
+            <div class="slider">
+                <div class="slide active" style="background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);">
+                    <div class="slide-content">
+                        <h2>Championship 2026</h2>
+                        <p>Join the biggest tournament of the year!</p>
+                        <button class="btn-primary">Learn More</button>
+                    </div>
+                </div>
+                <div class="slide" style="background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);">
+                    <div class="slide-content">
+                        <h2>New Game Release</h2>
+                        <p>Discuss the hottest releases</p>
+                        <button class="btn-primary">Explore</button>
+                    </div>
+                </div>
+                <div class="slide" style="background: linear-gradient(135deg, #ff9500 0%, #ff006e 100%);">
+                    <div class="slide-content">
+                        <h2>Find Your Team</h2>
+                        <p>Connect with fellow players today</p>
+                        <button class="btn-primary">Search Team</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-btn prev" onclick="prevSlide()">&larr;</button>
+            <button class="slider-btn next" onclick="nextSlide()">&rarr;</button>
+            
+            <div class="slider-dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <h2>Latest News</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <h3>Patch 2.5 Released!</h3>
+                    <p>New raid, class balancing & bug fixes</p>
+                    <span class="news-date">1 hour ago</span>
+                    <div style="display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #2a2a2a;">
+                        <button data-favor-id="news1" onclick="toggleFavorite('news1','news')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-heart"></i></button>
+                        <span data-like-count="news1" data-liked="false" onclick="toggleLike('news1','news')" style="cursor:pointer;color:#00d4ff;flex:1;">0 likes</span>
+                        <button onclick="shareContent('Patch 2.5 Released!')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-share"></i></button>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <h3>Best Screenshot Monthly</h3>
+                    <p>Community voting results released</p>
+                    <span class="news-date">3 hours ago</span>
+                    <div style="display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #2a2a2a;">
+                        <button data-favor-id="news2" onclick="toggleFavorite('news2','news')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-heart"></i></button>
+                        <span data-like-count="news2" data-liked="false" onclick="toggleLike('news2','news')" style="cursor:pointer;color:#00d4ff;flex:1;">0 likes</span>
+                        <button onclick="shareContent('Best Screenshot Monthly')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-share"></i></button>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <h3>Weekend Tournament</h3>
+                    <p>Arena starts tomorrow at 6 PM</p>
+                    <span class="news-date">5 hours ago</span>
+                    <div style="display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #2a2a2a;">
+                        <button data-favor-id="news3" onclick="toggleFavorite('news3','news')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-heart"></i></button>
+                        <span data-like-count="news3" data-liked="false" onclick="toggleLike('news3','news')" style="cursor:pointer;color:#00d4ff;flex:1;">0 likes</span>
+                        <button onclick="shareContent('Weekend Tournament')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-share"></i></button>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                    <h3>New Achievements</h3>
+                    <p>20 new trophies and badges added</p>
+                    <span class="news-date">10 hours ago</span>
+                    <div style="display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #2a2a2a;">
+                        <button data-favor-id="news4" onclick="toggleFavorite('news4','news')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-heart"></i></button>
+                        <span data-like-count="news4" data-liked="false" onclick="toggleLike('news4','news')" style="cursor:pointer;color:#00d4ff;flex:1;">0 likes</span>
+                        <button onclick="shareContent('New Achievements')" style="background:0;border:0;cursor:pointer;color:#999;"><i class="fas fa-share"></i></button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-content">
+                    <h3 id="totalUsers">0</h3>
+                    <p>Active Players</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-images"></i>
+                <div class="stat-content">
+                    <h3>420+</h3>
+                    <p>Gallery Photos</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-trophy"></i>
+                <div class="stat-content">
+                    <h3>50+</h3>
+                    <p>Tournaments/Year</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-comments"></i>
+                <div class="stat-content">
+                    <h3>10K+</h3>
+                    <p>Forum Discussions</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="games-section">
+            <h2>Popular Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon" style="background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Valorant</h3>
+                    <p class="game-players">2,341 players</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);"><i class="fas fa-rocket"></i></div>
+                    <h3>Rocket League</h3>
+                    <p class="game-players">1,856 players</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background: linear-gradient(135deg, #ff9500 0%, #ff006e 100%);"><i class="fas fa-fire"></i></div>
+                    <h3>Counter-Strike 2</h3>
+                    <p class="game-players">3,124 players</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><i class="fas fa-crown"></i></div>
+                    <h3>League of Legends</h3>
+                    <p class="game-players">2,789 players</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Gaming Community. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>let currentSlide=0;function showSlide(n){const s=document.querySelectorAll('.slide'),d=document.querySelectorAll('.dot');if(n>=s.length)currentSlide=0;if(n<0)currentSlide=s.length-1;s.forEach(x=>x.classList.remove('active'));d.forEach(x=>x.classList.remove('active'));s[currentSlide].classList.add('active');d[currentSlide].classList.add('active');}function nextSlide(){currentSlide++;showSlide(currentSlide);}function prevSlide(){currentSlide--;showSlide(currentSlide);}function goToSlide(n){currentSlide=n;showSlide(currentSlide);}setInterval(nextSlide,5000);window.addEventListener('load',()=>{const u=JSON.parse(localStorage.getItem('users'))||[];document.getElementById('totalUsers').textContent=u.length;});</script>
+</body>
+</html>

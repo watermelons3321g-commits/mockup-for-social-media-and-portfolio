@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Community - Friends</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><i class="fas fa-gamepad"></i> Gaming Community</div>
+            <div class="nav-user">
+                <span id="currentUser">User</span>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="sidebar">
+        <a href="main.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="friends.html" class="nav-link active"><i class="fas fa-users"></i> Friends</a>
+        <a href="tournaments.html" class="nav-link"><i class="fas fa-trophy"></i> Tournaments</a>
+        <a href="index.html" class="nav-link logout-link"><i class="fas fa-sign-out-alt"></i> Exit</a>
+    </nav>
+
+    <main class="main-content">
+        <section class="friends-section">
+            <h1>Players & Teams</h1>
+            <p class="section-subtitle">Find interesting people and join teams</p>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchName" placeholder="Search by name..." oninput="searchFriends()">
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="searchCity" placeholder="Search by city..." oninput="searchFriends()">
+                </div>
+            </div>
+
+            <div class="friends-grid" id="friendsGrid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Gaming Community. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>const friendsData=[{id:1,name:'ProPlayer_1',city:'Moscow',rank:'Diamond',avatar:'A',game:'Valorant'},{id:2,name:'NoobMaster',city:'St.Petersburg',rank:'Platinum',avatar:'B',game:'CS2'},{id:3,name:'Legend_99',city:'Moscow',rank:'Gold',avatar:'C',game:'LoL'},{id:4,name:'SniperAce',city:'Kazan',rank:'Diamond',avatar:'D',game:'Valorant'},{id:5,name:'GamerGirl',city:'Ekaterinburg',rank:'Platinum',avatar:'E',game:'RL'},{id:6,name:'CaptainVideo',city:'Moscow',rank:'Gold',avatar:'F',game:'Dota2'},{id:7,name:'StreamKing',city:'Novosibirsk',rank:'Diamond',avatar:'G',game:'Valorant'},{id:8,name:'TeamLeader',city:'Moscow',rank:'Platinum',avatar:'H',game:'CS2'},{id:9,name:'LuckyFinder',city:'Krasnodar',rank:'Gold',avatar:'I',game:'WoW'},{id:10,name:'DominatorPro',city:'St.Petersburg',rank:'Diamond',avatar:'J',game:'LoL'},{id:11,name:'CosplayQueen',city:'Moscow',rank:'Silver',avatar:'K',game:'FF'},{id:12,name:'TourneyAdmin',city:'Kazan',rank:'Gold',avatar:'L',game:'Valorant'}];function renderFriends(f=friendsData){const g=document.getElementById('friendsGrid');g.innerHTML='';if(!f.length){g.innerHTML='<p style="grid-column: 1/-1; text-align: center; padding: 2rem;">No players found</p>';return;}f.forEach(friend=>{const c=document.createElement('div');c.className='friend-card';c.innerHTML=`<div class="friend-avatar">${friend.avatar}</div><div class="friend-info"><h3>${friend.name}</h3><p class="friend-rank"><i class="fas fa-shield-alt"></i> ${friend.rank}</p><p class="friend-game">${friend.game}</p><p class="friend-city"><i class="fas fa-map-marker-alt"></i> ${friend.city}</p></div><button class="btn-message" onclick="msgClick(this)"><i class="fas fa-envelope"></i> Message</button>`;g.appendChild(c);});}function searchFriends(){const n=document.getElementById('searchName').value.toLowerCase(),c=document.getElementById('searchCity').value.toLowerCase(),f=friendsData.filter(fr=>fr.name.toLowerCase().includes(n)&&fr.city.toLowerCase().includes(c));renderFriends(f);}function msgClick(b){b.innerHTML='<i class="fas fa-check"></i> Sent!';b.disabled=true;b.style.background='#00d4ff';setTimeout(()=>{b.innerHTML='<i class="fas fa-envelope"></i> Message';b.disabled=false;b.style.background='';},2000);}window.addEventListener('load',()=>renderFriends());</script>

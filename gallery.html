@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Community - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><i class="fas fa-gamepad"></i> Gaming Community</div>
+            <div class="nav-user">
+                <span id="currentUser">User</span>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="sidebar">
+        <a href="main.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="gallery.html" class="nav-link active"><i class="fas fa-images"></i> Gallery</a>
+        <a href="friends.html" class="nav-link"><i class="fas fa-users"></i> Friends</a>
+        <a href="tournaments.html" class="nav-link"><i class="fas fa-trophy"></i> Tournaments</a>
+        <a href="index.html" class="nav-link logout-link"><i class="fas fa-sign-out-alt"></i> Exit</a>
+    </nav>
+
+    <main class="main-content">
+        <section class="gallery-section">
+            <h1>Community Gallery</h1>
+            <p class="section-subtitle">Best screenshots and moments from our gamers</p>
+
+            <div class="gallery-filters">
+                <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+                <button class="filter-btn" onclick="filterGallery('screenshots')">Screenshots</button>
+                <button class="filter-btn" onclick="filterGallery('events')">Events</button>
+                <button class="filter-btn" onclick="filterGallery('tournaments')">Tournaments</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Gaming Community. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>const galleryData=[{id:1,category:'screenshots',title:'Epic Moment',author:'ProPlayer_1'},{id:2,category:'screenshots',title:'Headshot!',author:'NoobMaster'},{id:3,category:'screenshots',title:'Qual Win',author:'Legend_99'},{id:4,category:'screenshots',title:'Top Frag',author:'SniperAce'},{id:5,category:'events',title:'Real Meet',author:'GamerGirl'},{id:6,category:'events',title:'LAN 2025',author:'EventManager'},{id:7,category:'events',title:'Stream Team',author:'CaptainVideo'},{id:8,category:'events',title:'Victory!',author:'TeamWinner'},{id:9,category:'tournaments',title:'Final',author:'TourneyAdmin'},{id:10,category:'tournaments',title:'Championship',author:'ChampionGuy'},{id:11,category:'tournaments',title:'Match Day',author:'SportsCaster'},{id:12,category:'tournaments',title:'Awards',author:'OrganizerPro'},{id:13,category:'screenshots',title:'Pentakill!',author:'KillStreak'},{id:14,category:'screenshots',title:'Rank Up!',author:'NewRank'},{id:15,category:'events',title:'Stream Marathon',author:'StreamKing'},{id:16,category:'events',title:'Gamers Con',author:'ConventionHost'},{id:17,category:'tournaments',title:'1v1',author:'DuelMaster'},{id:18,category:'tournaments',title:'Team Champ',author:'TeamLeader'},{id:19,category:'screenshots',title:'Rare Drop',author:'LuckyFinder'},{id:20,category:'screenshots',title:'Domination',author:'DominatorPro'},{id:21,category:'events',title:'Cosplay',author:'CosplayQueen'},{id:22,category:'tournaments',title:'Qual Start',author:'QualifierMod'}];function renderGallery(cat='all'){const g=document.getElementById('galleryGrid');g.innerHTML='';const colors=['linear-gradient(135deg, #667eea 0%, #764ba2 100%)','linear-gradient(135deg, #f093fb 0%, #f5576c 100%)','linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)','linear-gradient(135deg, #fa709a 0%, #fee140 100%)','linear-gradient(135deg, #ff006e 0%, #8338ec 100%)','linear-gradient(135deg, #00d4ff 0%, #0099ff 100%)'];galleryData.forEach(p=>{if(cat==='all'||p.category===cat){const i=document.createElement('div');i.className='gallery-item';i.dataset.category=p.category;const bg=colors[p.id%colors.length];i.innerHTML=`<div class="gallery-image" style="background: ${bg};"><div class="gallery-overlay"><div class="gallery-info"><p class="gallery-category">${p.category==='screenshots'?'Screenshot':p.category==='events'?'Event':'Tournament'}</p></div></div></div><div class="gallery-caption"><h3>${p.title}</h3><p>@${p.author}</p></div>`;g.appendChild(i);}});}function filterGallery(c){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');renderGallery(c);}window.addEventListener('load',()=>renderGallery('all'));</script>
